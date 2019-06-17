@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+  </head>
+
+  <body>
+
+        <nav class='navbar navbar-expand-md bg-dark navbar-dark navbar-fix-top mynav'>
+          <button class="navbar-toggler" type="button", data-toggle='collapse', data-target=#bro>
+            <span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse", id='bro'>
+            <div class="container">
+              <ul class="navbar-nav">
+                <li><a class= 'navbar-brand logo-font', href="{% url 'home'%}">THC</a></li>
+                <li class="nav-item"><a class="nav-link", href="{% url 'thc_app:aboutUs'%}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link", href="{% url 'thc_app:store'%}">Store</a></li>
+                {% if user.is_authenticated %}
+                  <li> <a href="#"> Post </a></li>
+                  <li> <a href="#"> Groups </a></li>
+                  <li> <a href="#"> Create Group</a></li>
+                  <li> <a href="{% url 'accounts:thanks' %}"> Logout </a></li>
+
+                {% else %}
+                <li> <a href="#"> Groups </a></li>
+                <li> <a href="{% url 'accounts:login' %}"> Login </a></li>
+                <li class="nav-item"><a class="nav-link", href="{% url 'accounts:signup' %}">Register</a></li>
+
+                {% endif %}
+
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container mycontent">
+          {% block body_block %}
+          <!-- Anything outside of this will be inherited if you extend.  -->
+          {% endblock %}
+        </div>
+
+  </body>
+</html>
