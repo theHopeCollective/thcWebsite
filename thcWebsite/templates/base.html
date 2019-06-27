@@ -22,7 +22,7 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'thcStore' %}">Store</a>
+            <a class="nav-link" href="{% url 'thcStore:product_list' %}">Store</a>
           </li>
 
 
@@ -38,7 +38,7 @@
             {% if user.is_artist %}
               <!--  added options -->
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'accounts:user_profile' %}">Profile</a>
+                  <a class="dropdown-item" href="{% url 'accounts:user_profile' user.display_name %}">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <a class="dropdown-item" href="{% url 'accounts:thanks' %}">Logout</a>
                   <div class="dropdown-divider"></div>

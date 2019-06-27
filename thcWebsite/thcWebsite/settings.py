@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'thcStore',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
     'accounts',
-    'bootstrap4',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -139,3 +141,7 @@ MEDIA_URL= '/media/'
 LOGIN_URL = '/accounts/user_login'
 LOGIN_REDIRECT_URL= 'test'
 LOGOUT_REDIRECT_URL= 'thanks'
+
+#This is the key that we are going to use to store the cart in the user session.
+# Since Django sessions are managed per-visitor, we can use the same cart session key for all sessions
+CART_SESSION_ID = 'cart'

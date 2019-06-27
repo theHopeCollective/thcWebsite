@@ -1,6 +1,7 @@
 # Create your views here.
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from . import forms, models
 # @login_required
 class userProfileSummary(DetailView):
     model= models.User
-
+    #
     slug_field = 'display_name'
     slug_url_kwarg = 'display_name'
 
