@@ -11,6 +11,17 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from braintree import Configuration, Environment
+BRAINTREE_MERCHANT_ID = '3z28jxh38j84fqfd'  # Merchant ID
+BRAINTREE_PUBLIC_KEY = 'bwvk44szjg2hx87c'   # Public Key
+BRAINTREE_PRIVATE_KEY = '3e3a3c4935411f2ee4ca9ecf59266841'  # Private key
+
+Configuration.configure(
+    Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +54,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'accounts',
+    'payment.apps.PaymentConfig',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

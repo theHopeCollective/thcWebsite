@@ -32,6 +32,7 @@ urlpatterns = [
     path('thanks/', views.ThanksPage.as_view(), name= 'thanks'),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('payment/', include('payment.urls', namespace='payment')),
 
     path('thcStore/', include('thcStore.urls', namespace='thcStore')),
 

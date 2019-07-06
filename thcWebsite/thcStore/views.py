@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from  cart.forms import CartAddProductForm
+from django.views.generic import CreateView
+from .forms import ProductCreateForm
+from django.urls import reverse_lazy
+
 def product_list(request, category_slug=None):
 # Catalog View
     category = None
@@ -28,3 +32,9 @@ def product_detail(request, id, slug):
               'thcStore/product/detail.html',
               {'product': product,
                'cart_product_form': cart_product_form})
+
+class product_create(CreateView):
+        # form_class = forms.ProductCreateForm
+        form_class = ProductCreateForm
+        success_url = reverse_lazy("login")
+        template_name = "thcStore/product/create.html"
