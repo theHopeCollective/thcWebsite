@@ -19,7 +19,7 @@ def product_list(request, category_slug=None):
                   'thcStore/product/list.html',
                   {'category': category,
                    'categories': categories,
-                   'products': products})
+                   'products': products,},)
 
 def product_detail(request, id, slug):
 #product View
@@ -28,8 +28,7 @@ def product_detail(request, id, slug):
                                 slug=slug,
                                 available=True)
     cart_product_form = CartAddProductForm()
-    return render(request,
-              'thcStore/product/detail.html',
+    return render(request, 'thcStore/product/detail.html',
               {'product': product,
                'cart_product_form': cart_product_form})
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=200,
@@ -34,13 +35,22 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    # slug= slugify(name)
     class Meta:
         ordering = ('name',)
         index_together = (('id', 'slug'),)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.s = slugify(self.q)
+
+        super(Test, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('thcStore:product_detail',
-                       args=[self.id, self.slug])
+        # return reverse('thcStore:product_detail',
+        #                args=[self.id, self.slug])
+        return reverse('thcStore:product_detail', kwargs={'id': self.id, 'slug': self.slug})
