@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+# admin.site.register(User, UserAdmin)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -159,3 +160,9 @@ LOGOUT_REDIRECT_URL= 'thanks'
 #This is the key that we are going to use to store the cart in the user session.
 # Since Django sessions are managed per-visitor, we can use the same cart session key for all sessions
 CART_SESSION_ID = 'cart'
+
+PAYMENT_HOST = 'localhost:8000'
+PAYMENT_USES_SSL = False
+PAYMENT_MODEL = 'payment.Payment'
+PAYMENT_VARIANTS = {
+    'default': ('payments.dummy.DummyProvider', {})}

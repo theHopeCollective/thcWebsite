@@ -26,27 +26,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    EMAIL_FIELD= 'email'
+    REQUIRED_FIELDS = ['display_name', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
 
-    def get_full_name(self):
-        '''
-        Returns the first_name plus the last_name, with a space in between.
-        '''
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
+    def __str__(self):
+        return "@{}".format(self.display_name)
 
-    def get_short_name(self):
-        '''
-        Returns the short name for the user.
-        '''
-        return self.first_name
+    def get_absolute_url(self):
+        return reverse("accounts:user_detail", kwargs={'pk': self.pk}   )
 
     def email_user(self, subject, message, from_email=None, **kwargs):
-        '''
-        Sends an email to this User.
-        '''
+
+        # Sends an email to this User.
+
         send_mail(subject, message, from_email, [self.email], **kwargs)
