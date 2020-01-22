@@ -40,7 +40,7 @@
             {% if user.is_artist %}
               <!--  added options -->
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'accounts:user_update' pk=user.pk %}">Profile</a>
+                  <a class="dropdown-item" href="{% url 'accounts:user_detail' pk=user.pk %}">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <a class="dropdown-item" href="{% url 'accounts:logout'  %}">Logout</a>
               </div>

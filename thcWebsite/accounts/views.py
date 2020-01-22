@@ -21,7 +21,7 @@ class userDetailView(DetailView):
     slug_field = 'display_name'
     slug_url_kwarg = 'display_name'
 
-    template_name= 'accounts/user_profile.html'
+    template_name= 'accounts/user_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -39,11 +39,12 @@ class userUpdateView(UpdateView):
     form_class = forms.UserEditForm
     model = models.User
 
-    template_name = 'accounts/edit_profile.html'
+    template_name = 'accounts/user_update.html'
 
-    def get_success_url(self, display_name):
-        display_name = self.kwargs['pk']
-        return reverse_lazy('accounts:edit_profile', kwargs={'pk': display_name})
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('accounts:user_detail', kwargs={'pk': pk })
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

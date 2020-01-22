@@ -1,5 +1,3 @@
-
-
 from __future__ import unicode_literals
 
 from django.db import models
@@ -21,7 +19,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_artist = models.BooleanField(_('Are you a Wake County Based Artist?'), default=False)
     is_nonprofit = models.BooleanField(_('Are you representing a Wake County Based Nonprofit looking to benefit our community?'), default=False)
 
-    profile_pic = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
 
     objects = UserManager()
 

@@ -1,6 +1,9 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views, forms
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 app_name= 'accounts'
 
@@ -13,4 +16,4 @@ urlpatterns= [
     path('<slug:pk>/', views.userDetailView.as_view(),name='user_detail'),
     path('update/<pk>/', views.userUpdateView.as_view(),name='user_update'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

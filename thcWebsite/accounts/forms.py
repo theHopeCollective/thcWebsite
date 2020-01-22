@@ -32,7 +32,7 @@ class UserEditForm(UserChangeForm):
     class Meta:
       model = User
       # fields = ( "first_name", "last_name", "display_name","email","password1", "password2", "is_artist", "is_nonprofit")
-      fields = ( "first_name", "last_name", "display_name","email", "is_artist", "is_nonprofit")
+      fields = ( "first_name", "last_name", "display_name","email", "is_artist", "is_nonprofit", "profile_pic")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
