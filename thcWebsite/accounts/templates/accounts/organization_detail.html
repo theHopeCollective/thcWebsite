@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+    <h1> {{user.display_name }}
+      <img src='{{ organization.profile_pic.url }}' class="rounded-circle" alt="Profile Picture Not Found" width="240">
+
+    </h1>
+
+    <div class="container">
+      <p> {{user.first_name }}</p>
+      <p> {{user.last_name }}</p>
+      <p> {{user.first_name }}</p>
+      <p> {{user.is_artist}} <p>
+
+
+    </div>
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'accounts:user_update' pk=user.pk %}" role="button">Update Account Info</a>
+      <!-- {% if user.is_artist %} -->
+      <a class="btn btn-secondary" href="{% url 'thcStore:product_create' %}" role="button">Create Product</a>
+      <!-- {% endif %} -->
+    </div>
+
+
+  {% endblock %}

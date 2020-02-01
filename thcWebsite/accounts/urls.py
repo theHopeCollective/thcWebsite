@@ -12,6 +12,9 @@ urlpatterns= [
     path('logout/', auth_views.LogoutView.as_view(), name= 'logout'),
 
     path('signup/', views.userCreateView.as_view(), name= 'signup'),
+    path('signup/artist_signup/', views.artistCreateView.as_view(), name='artist_signup'),
+    path('signup/organization_signup/', views.organizationCreateView.as_view(), name='organization_signup'),
+
     # path('user_profile/', views.userProfileSummary.as_view(template_name= 'accounts/user_profile.html')),
     path('<slug:pk>/', views.userDetailView.as_view(),name='user_detail'),
     path('update/<pk>/', views.userUpdateView.as_view(),name='user_update'),

@@ -4,20 +4,37 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, UpdateView
 from django.views.generic.detail import DetailView
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from . import forms, models
 
-# Sign Up View
+decorators = [login_required]
+
+#Sign Up views
 class userCreateView(CreateView):
     form_class = forms.UserCreateForm
-    success_url = reverse_lazy("login")    #Succesful login reroutes to login page
-    template_name = "accounts/signup.html"
+    models.User
+    success_url = reverse_lazy("login")
+    template_name = "accounts/signup/user_signup.html"
+
+class organizationCreateView(CreateView):
+    form_class = forms.organizationCreateForm
+    models.User
+    success_url = reverse_lazy("login")
+    template_name = "accounts/signup/organization_signup.html"
+
+class artistCreateView(CreateView):
+    form_class = forms.artistCreateForm
+    models.User
+    success_url = reverse_lazy("login")
+    template_name = "accounts/signup/artist_signup.html"
 
 
-# @login_required
+#User Info page
+@method_decorator(decorators, name='dispatch')
 class userDetailView(DetailView):
     model= models.User
-    #
+
     slug_field = 'display_name'
     slug_url_kwarg = 'display_name'
 
@@ -27,42 +44,14 @@ class userDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
-    # template_name= "accounts/user_profile.html"
 
-class userCreateView(CreateView):
-    form_class = forms.UserCreateForm
-    models.User
-    success_url = reverse_lazy("login")
-    template_name = "accounts/signup.html"
-
+@method_decorator(decorators, name='dispatch')
 class userUpdateView(UpdateView):
     form_class = forms.UserEditForm
     model = models.User
 
     template_name = 'accounts/user_update.html'
 
-
     def get_success_url(self):
         pk = self.kwargs['pk']
         return reverse_lazy('accounts:user_detail', kwargs={'pk': pk })
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['now'] = timezone.now()
-    #     return context
-    #
-    # def get_object(self, queryset=None):
-    #     return self.request.user
-    #
-    # def get(self, request, **kwargs):
-    #     self.object = User.objects.get(username=self.request.user.username)
-    #     form_class = self.get_form_class()
-    #     form = self.get_form(form_class)
-    #     context = self.get_context_data(object=self.object, form=form)
-    #     return self.render_to_response(context)
-    #
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     self.object.user = self.request.user
-    #     self.object.save()
-    #     return HttpResponseRedirect(self.get_success_url())
