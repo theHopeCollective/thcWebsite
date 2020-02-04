@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>THC</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel= "stylesheet" href= "{% static 'thcWebsite/css/master.css'%}">
-  </head>
-  <body>
+{% load staticfiles %}
+<!-- <html lang="en" dir="ltr"> -->
+<head>
+  <meta charset="utf-8">
+  <title>THC</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel= "stylesheet" href= "{% static 'css/master.css' %}">
+</head>
 
-  <nav class="navbar mainnav navbar-expand-lg navbar-light bg-light">
+    <body>
+
+      <nav class="navbar mainnav navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">
         <a class="navbar-brand" href="/"><img src={% static "images/logo.png" %} width="100" height="60" alt=""></a>
       </a>
@@ -31,33 +32,41 @@
             <a class="nav-link" href="#">Partners</a>
           </li>
         </ul>
+        <div class="dropdown-container" id="user-button-dropdown">
 
-          <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User
+          <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ user.display_name }}
+            {% if user.is_authenticated %} {{user.display_name}}
+            {% else %}
+            User
+            {% endif %}
+
           </a>
           {% if user.is_authenticated %}
             {% if user.is_artist %}
               <!--  added options -->
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu" id= user-button-dropdown-menu aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'accounts:user_detail' pk=user.pk %}">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <a class="dropdown-item" href="{% url 'accounts:logout'  %}">Logout</a>
               </div>
             {% else %}
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" id= user-button-dropdown-menu aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'accounts:user_update' pk=user.pk %}"> Edit Account </a>
                 <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
 
             </div>
             {% endif %}
           {% else %}
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" id= user-button-dropdown-menu aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'accounts:signup' %}">Register</a>
                 <a class="dropdown-item" href="{% url 'accounts:login' %}">Login</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Why make an account?</a>
             </div>
           {% endif %}
-        </li>
+        </div>
+
+
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
