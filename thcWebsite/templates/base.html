@@ -6,6 +6,7 @@
   <title>THC</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel= "stylesheet" href= "{% static 'css/master.css' %}">
+
 </head>
 
     <body>
@@ -31,10 +32,17 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Partners</a>
           </li>
+
         </ul>
         <div class="dropdown-container" id="user-button-dropdown">
 
-          <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ user.display_name }}
+          <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if user.profile_pic %}
+              <img src='{{ user.profile_pic.url }}' class="rounded-circle profile-pic" id="profilepic"  alt="Profile Picture Not Found" width="40">
+            {% else %}
+              <img src={% static "images/empty-profile.png" %} class="rounded-circle profile-pic" id="profilepic" alt="Profile Picture Not Found" width="40">
+            {% endif %}
+
             {% if user.is_authenticated %} {{user.display_name}}
             {% else %}
             User

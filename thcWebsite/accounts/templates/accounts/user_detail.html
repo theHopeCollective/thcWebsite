@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load bootstrap3 %}
-{% load static %}
+{% load staticfiles %}
 {% block content %}
 
     <h1> {{user.display_name }}
-      <img src='{{ user.profile_pic.url }}' class="rounded-circle" alt="Profile Picture Not Found" width="240">
-
+      {% if user.profile_pic %}
+        <img src='{{ user.profile_pic.url }}' class="rounded-circle profile-pic" id="profilepic"  alt="Profile Picture Not Found" width="120">
+      {% else %}
+        <img src={% static "images/empty-profile.png" %} class="rounded-circle profile-pic" id="profilepic" alt="Profile Picture Not Found" width="120">
+      {% endif %}
     </h1>
 
     <div class="container">
+      <p> {{user.display_name }}</p>
       <p> {{user.first_name }}</p>
       <p> {{user.last_name }}</p>
-      <p> {{user.first_name }}</p>
       <p> {{user.is_artist}} <p>
 
 
